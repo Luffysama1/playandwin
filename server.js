@@ -4,98 +4,72 @@ const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public')); // Static files for CSS, JS
+app.use(express.static('public'));
 app.use(session({
-    secret: 'admin-secret',
+    secret: 'secret-key',
     resave: false,
     saveUninitialized: true
 }));
 
-// Mock admin credentials
-const adminCredentials = {
-    username: 'admin',
-    password: 'password'
-};
+// Mock database for tournaments
+let tournaments = [
+    { name: "Fortnite Weekly Nano", start_date: "2024-12-20", prize: "$739" },
+    { name: "Apex Legends Monthly", start_date: "2024-12-25", prize: "$800" }
+];
 
-// Store tournaments in-memory
-let tournaments = [];
+// Serve signup page
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/signup.html');
+});
 
-// Admin Login Route
-app.get('/admin/login', (req, res) => {
+// Signup page
+app.get('/signup', (req, res) => {
     res.send(`
-        <form action="/admin/login" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+        <form action="/signup" method="POST">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Sign Up</button>
         </form>
     `);
 });
 
-app.post('/admin/login', (req, res) => {
-    const { username, password } = req.body;
-    if (username === adminCredentials.username && password === adminCredentials.password) {
-        req.session.isAdmin = true;
-        return res.redirect('/admin/dashboard');
-    }
-    res.send('Invalid credentials');
-});
-
-// Admin Dashboard Route
-app.get('/admin/dashboard', (req, res) => {
-    if (!req.session.isAdmin) {
-        return res.redirect('/admin/login');
-    }
+// Handle signup form submission
+app.post('/signup', (req, res) => {
+    const { username, email, password } = req.body;
+    users.push({ username, email, password });
+    req.session.isSignedUp = true;  // Mark the user as signed up
     res.send(`
-        <h1>Admin Dashboard</h1>
-        <a href="/admin/manage-tournaments">Manage Tournaments</a><br>
-        <a href="/admin/logout">Logout</a><br><br>
-        <h3>Current Tournaments:</h3>
-        <ul>
-            ${tournaments.map(tournament => `<li>${tournament.name} - ${tournament.start_date}</li>`).join('')}
-        </ul>
+        <h1>Signup Successful!</h1>
+        <p>Redirecting you to the tournament page...</p>
+        <script>
+            setTimeout(() => { window.location.href = '/tournament'; }, 2000);
+        </script>
     `);
 });
 
-// Admin Logout Route
-app.get('/admin/logout', (req, res) => {
-    req.session.destroy((err) => {
-        res.redirect('/admin/login');
-    });
-});
-
-// Manage Tournaments Route
-app.get('/admin/manage-tournaments', (req, res) => {
-    if (!req.session.isAdmin) {
-        return res.redirect('/admin/login');
+// Tournaments Page (Protected Route)
+app.get('/tournaments', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/signup'); // If not logged in, redirect to signup
     }
+
+    let tournamentList = tournaments.map(tournament => `
+        <div>
+            <h3>${tournament.name}</h3>
+            <p>Starts on: ${tournament.start_date}</p>
+            <p>Prize: ${tournament.prize}</p>
+        </div>
+    `).join('');
+
     res.send(`
-        <h1>Manage Tournaments</h1>
-        <form action="/admin/create-tournament" method="POST">
-            <input type="text" name="name" placeholder="Tournament Name" required>
-            <input type="date" name="start_date" required>
-            <textarea name="description" placeholder="Description" required></textarea>
-            <button type="submit">Create Tournament</button>
-        </form>
-        <a href="/admin/dashboard">Back to Dashboard</a>
+        <h2>Available Tournaments</h2>
+        ${tournamentList}
     `);
 });
 
-// Create Tournament Logic
-app.post('/admin/create-tournament', (req, res) => {
-    if (!req.session.isAdmin) {
-        return res.redirect('/admin/login');
-    }
-    const { name, start_date, description } = req.body;
-    tournaments.push({ name, start_date, description });
-    res.send(`
-        <h3>Tournament Created Successfully!</h3>
-        <a href="/admin/manage-tournaments">Create Another Tournament</a>
-        <a href="/admin/dashboard">Back to Dashboard</a>
-    `);
-});
-
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

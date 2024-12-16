@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Jhuse Esports</title>
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="/signup.css"> <!-- CSS path -->
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <h1>Sign Up for Jhuse Esports</h1>
         <nav>
@@ -18,24 +17,34 @@
         </nav>
     </header>
 
-    <!-- Signup Section -->
     <section id="signup">
         <h2>Create Your Account</h2>
-        <form action="/signup" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
+        <form id="signup-form" action="/signup" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            </div>
             <button type="submit">Sign Up</button>
         </form>
         <p>Or sign up with:</p>
         <div class="oauth-buttons">
             <a href="/auth/google" class="oauth-google">Sign Up with Google</a>
-            <a href="/auth/discord" class="oauth-discord">Sign Up with Discord</a>
         </div>
         <p>Already have an account? <a href="login.html">Login</a></p>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Jhuse Esports. All Rights Reserved.</p>
     </footer>

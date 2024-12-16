@@ -17,5 +17,17 @@ document.getElementById('overlay').addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page Loaded and Ready');
 });
+function checkSignup() {
+    const isUserSignedIn = false; // Replace this with actual logic to check if the user is signed in
+
+    if (isUserSignedIn) {
+        // Redirect to the tournament details page
+        window.location.href = "tournament-detail.html";
+    } else {
+        // Redirect to the signup page
+        alert("Please sign up or log in to view this tournament.");
+        window.location.href = "signup.html";
+    }
+}
 
   

@@ -1,25 +1,21 @@
 /* General Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #4a00d9;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #0b0f1a;
-    color: white;
-    line-height: 1.6;
 }
 
-/* Header */
 header {
-    text-align: center;
+    background-color: #333;
     padding: 20px;
-    background: linear-gradient(90deg, #1e1e1e, #151515);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: white;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
-    color: #ff4655;
 }
 
 header nav ul {
@@ -28,88 +24,97 @@ header nav ul {
 }
 
 header nav ul li {
-    display: inline-block;
+    display: inline;
     margin: 0 10px;
 }
 
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
 }
-
 /* Signup Section */
 #signup {
     max-width: 500px;
     margin: 40px auto;
-    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #signup h2 {
-    color: #ff4655;
-    font-size: 1.8rem;
+    text-align: center;
+    color: #5a01fa;
     margin-bottom: 20px;
 }
 
-#signup form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-#signup form input,
-#signup form button {
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    border-color: #5a01fa;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5a01fa;
+    color: white;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-}
-
-#signup form input {
-    background: #2a2a2a;
-    color: white;
-}
-
-#signup form button {
-    background: #ff4655;
-    color: white;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-#signup form button:hover {
-    background: #d03c4a;
+button:hover {
+    background-color: #4a00d9;
 }
 
-/* OAuth Buttons */
 .oauth-buttons {
-    margin-top: 20px;
-}
-
-.oauth-google, .oauth-discord {
-    display: inline-block;
-    margin: 10px 5px;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    width: 200px;
     text-align: center;
+    margin: 20px 0;
 }
 
 .oauth-google {
-    background: #4285F4; /* Google Blue */
-}
-
-.oauth-discord {
-    background: #5865F2; /* Discord Blue */
+    display: inline-block;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
 .oauth-google:hover {
-    background: #357AE8;
+    background-color: #357ae8;
 }
 
-.oauth-discord:hover {
-    background: #4752C4;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 40px;
 }
