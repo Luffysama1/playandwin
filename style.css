@@ -1099,7 +1099,83 @@ ul li {
 .newsletter button:hover {
     background-color: #218838;
 }
+/* Signup Section */
+#signup {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+#signup h2 {
+    text-align: center;
+    color: #5a01fa;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    border-color: #5a01fa;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5a01fa;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a00d9;
+}
+
+.oauth-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.oauth-google {
+    display: inline-block;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.oauth-google:hover {
+    background-color: #357ae8;
+}
 /* Footer */
 footer {
     background-color: #333;
